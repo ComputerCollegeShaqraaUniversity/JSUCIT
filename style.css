@@ -10,63 +10,51 @@
 
 body {
     background-color: #ffffff; 
-    /* استخدام dvh لضمان التوافق مع متصفحات الجوال (شريط العنوان) */
-    height: 100vh;
+    /* استخدام dvh لضمان التوافق مع متصفحات الجوال */
     height: 100dvh; 
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow: hidden; /* منع السكرول نهائياً في الصفحة الأولى */
     position: relative;
 }
 
-/* تأثير دخول الصفحة (Fade In) */
+/* تأثير دخول الصفحة */
 @keyframes pageIn {
     from { opacity: 0; filter: blur(10px); transform: scale(0.95); }
     to { opacity: 1; filter: blur(0); transform: scale(1); }
 }
+body { animation: pageIn 0.8s ease-out forwards; }
 
-body {
-    animation: pageIn 0.8s ease-out forwards;
-}
-
-/* --- تعريف حركات الطفو (Animations) --- */
+/* --- الحركات --- */
 @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
 @keyframes float-45 { 0%, 100% { transform: rotate(45deg) translateY(0px); } 50% { transform: rotate(45deg) translateY(-20px); } }
-@keyframes float-minus25 { 0%, 100% { transform: rotate(-25deg) translateY(0px); } 50% { transform: rotate(-25deg) translateY(-20px); } }
-@keyframes float-30 { 0%, 100% { transform: rotate(30deg) translateY(0px); } 50% { transform: rotate(30deg) translateY(-20px); } }
 
-/* --- شعار الجامعة (الزاوية اليمنى) --- */
+/* --- الشعار العلوي --- */
 .university-logo {
     position: absolute;
     top: 30px;
     right: 30px;
     width: 240px;
-    height: auto;
     z-index: 100;
     mix-blend-mode: multiply; 
 }
 
-/* --- الأشكال الخلفية الديكورية --- */
+/* --- الأشكال الخلفية --- */
 .shape { position: absolute; z-index: 1; }
 .shape-1 { top: 12%; left: 8%; width: 50px; height: 50px; background: linear-gradient(135deg, #7F00FF, #00D2FF); transform: rotate(45deg); border-radius: 8px; opacity: 0.9; animation: float-45 5s ease-in-out infinite; }
 .shape-2 { top: 40%; left: -40px; width: 200px; height: 200px; background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%); border-radius: 50%; opacity: 0.5; animation: float 6.5s ease-in-out infinite; }
-.shape-3-fix { bottom: 8%; left: 8%; width: 80px; height: 80px; background: linear-gradient(135deg, #667eea, #764ba2); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); animation: float-minus25 4s ease-in-out infinite; }
-.shape-4 { top: 25%; right: 10%; width: 40px; height: 40px; background: linear-gradient(to bottom, #667eea, #764ba2); border-radius: 50%; animation: float 3s ease-in-out infinite; }
-.shape-5 { bottom: 10%; right: 10%; width: 60px; height: 60px; background: linear-gradient(135deg, #667eea, #764ba2); transform: rotate(30deg); border-radius: 10px; animation: float-30 5.5s ease-in-out infinite; }
-.shape-6 { top: 40%; left: 90%; width: 110px; height: 110px; background: linear-gradient(to bottom, #667eea, #63b5fc); border-radius: 50%; animation: float 7.5s ease-in-out infinite; }
-.shape-7 { top: 40%; left: 90%; width: 110px; height: 110px; background: linear-gradient(to bottom, #152c69, #63b5fc); opacity: 0.2; border-radius: 50%; animation: float 7.5s ease-in-out infinite; }
-.shape-8 { top: 62%; left: 2%; width: 140px; height: 140px; background: linear-gradient(to bottom, #667eea, #3b1080); opacity: 0.2; border-radius: 50%; animation: float 7.5s ease-in-out infinite; }
+.shape-3-fix { bottom: 8%; left: 8%; width: 80px; height: 80px; background: linear-gradient(135deg, #667eea, #764ba2); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
+.shape-4 { top: 25%; right: 10%; width: 40px; height: 40px; background: linear-gradient(to bottom, #667eea, #764ba2); border-radius: 50%; }
+.shape-5 { bottom: 10%; right: 10%; width: 60px; height: 60px; background: linear-gradient(135deg, #667eea, #764ba2); transform: rotate(30deg); border-radius: 10px; }
+.shape-6 { top: 40%; left: 90%; width: 110px; height: 110px; background: linear-gradient(to bottom, #667eea, #63b5fc); border-radius: 50%; }
 
-/* --- الحاوية الرئيسية للصفحة الأولى --- */
+/* --- البطاقة الرئيسية (الوضع الافتراضي: كمبيوتر) --- */
 .main-card {
     background: transparent; 
-    
-    /* أبعاد الكمبيوتر الافتراضية */
     width: 550px; 
-    height: 550px; 
-    
+    height: 550px; /* مربع مثالي */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -89,20 +77,20 @@ body {
     box-shadow: 0 40px 80px rgba(0, 0, 0, 0.35);
 }
 
-/* --- نصوص الصفحة الأولى --- */
+/* --- النصوص والمحتوى --- */
 .top-title { 
-    font-size: clamp(1.8rem, 5vw, 2.2rem); 
+    font-size: 2.2rem; 
     font-weight: 800; margin-bottom: -4px; 
     background: linear-gradient(90deg, #4facfe 0%, #7F00FF 100%); 
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
     background-clip: text; position: relative; z-index: 5; 
 }
 
-.logo-container { width: 85%; max-width: 350px; margin-bottom: 0px; display: flex; justify-content: center; padding: 0px; position: relative; z-index: 5; }
+.logo-container { width: 350px; margin: 0; display: flex; justify-content: center; position: relative; z-index: 5; }
 .logo-container img { width: 100%; height: auto; object-fit: contain; mix-blend-mode: multiply; filter: contrast(1.1); }
 
 .bottom-text { 
-    font-size: clamp(1rem, 4vw, 1.3rem); 
+    font-size: 1.3rem; 
     font-weight: 700; line-height: 1.5; color: #5a6fa8; position: relative; z-index: 5; 
 }
 .bottom-text span { display: block; background: linear-gradient(90deg, #4facfe 0%, #6157ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
@@ -110,7 +98,7 @@ body {
 /* --- زر السهم --- */
 .next-btn { 
     position: absolute; 
-    right: -1.5cm; margin-right: -35px; top: 50%; transform: translateY(-50%); 
+    right: -35px; top: 50%; transform: translateY(-50%); 
     width: 75px; height: 75px; 
     background-color: white; border-radius: 50%; border: none; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); 
     cursor: pointer; display: flex; justify-content: center; align-items: center; 
@@ -119,7 +107,7 @@ body {
 .next-btn:hover { transform: translateY(-50%) scale(1.1); }
 .arrow-icon { width: 16px; height: 16px; border-top: 5px solid #00d2ff; border-right: 5px solid #00d2ff; transform: rotate(45deg); margin-right: 6px; }
 
-/* --- تأثير الانتقال --- */
+/* تأثير الاختفاء */
 body.fade-out { opacity: 0; transform: scale(1.05); filter: blur(10px); }
 
 /* ========================================================== */
@@ -127,41 +115,47 @@ body.fade-out { opacity: 0; transform: scale(1.05); filter: blur(10px); }
 /* ========================================================== */
 
 @media (max-width: 768px) {
-    /* تعديل شعار الجامعة في الجوال */
-    .university-logo { width: 140px; top: 20px; right: 20px; }
+    /* 1. تصغير شعار الجامعة لعدم مزاحمة الدائرة */
+    .university-logo { width: 120px; top: 20px; right: 20px; }
     
-    /* === تعديل البطاقة الرئيسية لتكون دائرة مثالية في المنتصف === */
+    /* 2. ضبط الدائرة لتكون مثالية */
     .main-card { 
-        /* العرض نسبة من الشاشة */
-        width: 85vw; 
-        max-width: 360px; /* أقصى عرض */
+        /* العرض ثابت نسبياً لضمان الشكل */
+        width: 85vw;        
+        height: 85vw;       /* الارتفاع يساوي العرض تماماً */
+        max-width: 360px;   /* حد أقصى للحجم */
+        max-height: 360px;  /* حد أقصى للارتفاع */
         
-        /* هذا السطر يجبرها تكون دائرة */
-        aspect-ratio: 1 / 1; 
+        min-height: unset;  /* إلغاء أي حد أدنى قديم */
         
-        /* إعادة تعيين الارتفاع ليكون أوتوماتيكياً بناءً على العرض */
-        height: auto;
-        min-height: unset; 
+        /* جعلها دائرة */
+        border-radius: 50%;
         
-        padding: 20px;
+        /* تقليل الحشوة الداخلية لكي لا تضغط المحتوى */
+        padding: 15px; 
         
-        /* رفع الدائرة قليلاً للأعلى لتعويض مكان الزر في الأسفل (توسط بصري) */
-        transform: translateY(-5%);
+        /* التمركز */
+        margin: auto;
     }
     
-    /* تصغير الدوائر الخلفية قليلاً لتناسب الحجم الجديد */
-    .main-card::before { top: -10px; left: -10px; right: -10px; bottom: -10px; }
-    
-    /* زر التالي: نضعه في الأسفل في المنتصف */
+    /* 3. تصغير المحتوى الداخلي ليناسب الدائرة الصغيرة */
+    .top-title { font-size: 1.5rem; margin-top: 10px; }
+    .logo-container { width: 70%; margin: 5px 0; }
+    .bottom-text { font-size: 1rem; }
+
+    /* 4. تعديل الدوائر الخلفية */
+    .main-card::before { top: -15px; left: -15px; right: -15px; bottom: -15px; }
+
+    /* 5. زر التالي في الأسفل والمنتصف */
     .next-btn {
         right: 50%; 
         top: auto;
-        bottom: -35px; /* يخرج نصفه من الأسفل */
-        margin-right: -37.5px; /* نصف عرض الزر ليكون في المنتصف تماماً */
-        transform: translateY(0); /* إلغاء التحويل السابق */
+        bottom: -35px; /* يتدلى من الأسفل */
+        margin-right: -37.5px; /* توسيط دقيق */
+        transform: none; /* إلغاء التوسط العمودي */
     }
     .next-btn:hover { transform: scale(1.1); }
     
-    /* إخفاء بعض الأشكال لتقليل الازدحام في الجوال */
-    .shape-2, .shape-6, .shape-7 { opacity: 0.3; transform: scale(0.6); }
+    /* إخفاء الأشكال الخلفية المزدحمة */
+    .shape-2, .shape-6, .shape-7, .shape-8 { display: none; }
 }
