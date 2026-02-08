@@ -6,17 +6,17 @@
     <title>تدشين المجلة العلمية - JSUCIT</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* إضافة تأثير الانتقال (Fade Effect) هنا لضمان عمله */
+        /* إعدادات الانتقال */
         body {
             opacity: 1;
-            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out; /* حركة ناعمة جداً */
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
         }
         
-        /* كلاس الاختفاء الذي سيضيفه الجافاسكريبت */
+        /* كلاس الاختفاء */
         body.fade-out {
             opacity: 0;
-            transform: scale(1.1); /* تكبير بسيط عند الخروج */
-            pointer-events: none;  /* منع أي نقرات أخرى أثناء الاختفاء */
+            transform: scale(1.1);
+            pointer-events: none; /* هذا هو السطر الذي يعطل النقرات */
         }
     </style>
 </head>
@@ -50,17 +50,19 @@
     </div>
 
     <script>
+        // الحل للمشكلة: استشعار حدث ظهور الصفحة (حتى عند العودة من الخلف)
+        window.addEventListener('pageshow', function(event) {
+            // إزالة كلاس الاختفاء فوراً عند ظهور الصفحة
+            document.body.classList.remove('fade-out');
+        });
+
         document.getElementById('transitionLink').addEventListener('click', function(event) {
-            // 1. إيقاف الانتقال الفوري المعتاد
             event.preventDefault();
-            
-            // 2. الحصول على رابط الصفحة التالية
             const targetUrl = this.href;
 
-            // 3. إضافة كلاس الاختفاء للجسم (body)
+            // إضافة تأثير الخروج
             document.body.classList.add('fade-out');
 
-            // 4. الانتظار حتى تنتهي الحركة (0.8 ثانية) ثم الانتقال
             setTimeout(function() {
                 window.location.href = targetUrl;
             }, 800); 
